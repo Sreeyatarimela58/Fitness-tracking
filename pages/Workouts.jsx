@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Plus, Trash2, Edit2, Search, Filter, X, Flame, AlertCircle, Heart, Clock, Smile, Frown, Meh, Zap, Battery, Gauge } from 'lucide-react';
+import { Plus, Trash2, Edit2, Search, Filter, X, Flame, AlertCircle, Heart, Clock, Smile, Frown, Meh, Zap, Battery, Gauge, CalendarDays, History } from 'lucide-react';
 import { getWorkouts, saveWorkout, deleteWorkout, getProfile, estimateCalories } from '../services/storage';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -171,6 +171,11 @@ const Workouts = () => {
     return matchesType && matchesSearch;
   });
 
+  // Split into Today vs History
+  const todayStr = new Date().toLocaleDateString('en-CA');
+  const todayWorkouts = filteredWorkouts.filter(w => w.date === todayStr);
+  // History workouts are filtered out but we don't render them anymore
+
   // Helper for Feeling Icon
   const getFeelingIcon = (feeling) => {
     switch (feeling) {
@@ -204,6 +209,87 @@ const Workouts = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
   };
+
+  const WorkoutCard = ({ workout, showActions = true }) => (
+    <motion.div
+      variants={itemVariants}
+      layout
+      className="bg-card border border-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row gap-4 justify-between items-start md:items-center group"
+    >
+      <div className="flex items-start md:items-center gap-4 w-full md:w-auto">
+        <div className={`p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 text-primary shadow-inner shrink-0`}>
+          <span className="font-bold text-xl font-serif">{workout.type.charAt(0)}</span>
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <h3 className="font-semibold text-lg truncate">{workout.type}</h3>
+            <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide border ${workout.intensity === Intensity.High ? 'border-red-200 text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-300 dark:border-red-800' :
+              workout.intensity === Intensity.Medium ? 'border-orange-200 text-orange-600 bg-orange-50 dark:bg-orange-900/20 dark:text-orange-300 dark:border-orange-800' :
+                'border-green-200 text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-300 dark:border-green-800'
+              }`}>
+              {workout.intensity}
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <Clock size={14} />
+              <span>{new Date(workout.date).toLocaleDateString()} • {workout.time || '--:--'}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Flame size={14} className="text-orange-500" />
+              <span>{workout.caloriesBurned} kcal</span>
+            </div>
+            {workout.avgHeartRate && workout.avgHeartRate > 0 && (
+              <div className="flex items-center gap-1.5">
+                <Heart size={14} className="text-red-500" />
+                <span>{workout.avgHeartRate} bpm</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between w-full md:w-auto gap-4 pl-4 md:pl-0 border-l md:border-l-0 border-border">
+        {/* Feeling & Notes Snippet */}
+        <div className="flex flex-col items-start md:items-end text-sm">
+          <div className="flex gap-2">
+            {workout.rpe && (
+              <div className={`flex items-center gap-1.5 mb-1 px-2 py-1 rounded-lg border text-xs font-bold ${getRpeColor(workout.rpe)}`}>
+                <Gauge size={14} />
+                <span>RPE {workout.rpe}</span>
+              </div>
+            )}
+            {workout.feeling && (
+              <div className="flex items-center gap-1.5 mb-1 px-2 py-1 bg-secondary rounded-lg border border-border">
+                {getFeelingIcon(workout.feeling)}
+                <span className="font-medium text-xs">{workout.feeling}</span>
+              </div>
+            )}
+          </div>
+          {workout.notes && <p className="text-xs italic text-muted-foreground/60 max-w-[150px] truncate">"{workout.notes}"</p>}
+        </div>
+
+        {showActions && (
+          <div className="flex gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              onClick={() => openModal(workout)}
+              className="p-2 text-muted-foreground hover:bg-secondary hover:text-foreground rounded-lg transition-colors"
+            >
+              <Edit2 size={16} />
+            </button>
+            <button
+              onClick={() => handleDelete(workout.id)}
+              className="p-2 text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
+            >
+              <Trash2 size={16} />
+            </button>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
@@ -242,99 +328,29 @@ const Workouts = () => {
         </div>
       </div>
 
-      {/* List */}
-      <motion.div
-        variants={listVariants}
-        initial="hidden"
-        animate="visible"
-        className="grid gap-4"
-      >
-        {filteredWorkouts.length === 0 ? (
-          <motion.div variants={itemVariants} className="text-center py-12 text-muted-foreground bg-card border border-border rounded-xl">
-            No workouts found. Time to get moving!
-          </motion.div>
-        ) : (
-          filteredWorkouts.map((workout) => (
-            <motion.div
-              key={workout.id}
-              variants={itemVariants}
-              layout
-              className="bg-card border border-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row gap-4 justify-between items-start md:items-center group"
-            >
-              <div className="flex items-start md:items-center gap-4 w-full md:w-auto">
-                <div className={`p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 text-primary shadow-inner shrink-0`}>
-                  <span className="font-bold text-xl font-serif">{workout.type.charAt(0)}</span>
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <h3 className="font-semibold text-lg truncate">{workout.type}</h3>
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide border ${workout.intensity === Intensity.High ? 'border-red-200 text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-300 dark:border-red-800' :
-                      workout.intensity === Intensity.Medium ? 'border-orange-200 text-orange-600 bg-orange-50 dark:bg-orange-900/20 dark:text-orange-300 dark:border-orange-800' :
-                        'border-green-200 text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-300 dark:border-green-800'
-                      }`}>
-                      {workout.intensity}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1.5">
-                      <Clock size={14} />
-                      <span>{new Date(workout.date).toLocaleDateString()} • {workout.time || '--:--'}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Flame size={14} className="text-orange-500" />
-                      <span>{workout.caloriesBurned} kcal</span>
-                    </div>
-                    {workout.avgHeartRate && workout.avgHeartRate > 0 && (
-                      <div className="flex items-center gap-1.5">
-                        <Heart size={14} className="text-red-500" />
-                        <span>{workout.avgHeartRate} bpm</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between w-full md:w-auto gap-4 pl-4 md:pl-0 border-l md:border-l-0 border-border">
-                {/* Feeling & Notes Snippet */}
-                <div className="flex flex-col items-start md:items-end text-sm">
-                  <div className="flex gap-2">
-                    {workout.rpe && (
-                      <div className={`flex items-center gap-1.5 mb-1 px-2 py-1 rounded-lg border text-xs font-bold ${getRpeColor(workout.rpe)}`}>
-                        <Gauge size={14} />
-                        <span>RPE {workout.rpe}</span>
-                      </div>
-                    )}
-                    {workout.feeling && (
-                      <div className="flex items-center gap-1.5 mb-1 px-2 py-1 bg-secondary rounded-lg border border-border">
-                        {getFeelingIcon(workout.feeling)}
-                        <span className="font-medium text-xs">{workout.feeling}</span>
-                      </div>
-                    )}
-                  </div>
-                  {workout.notes && <p className="text-xs italic text-muted-foreground/60 max-w-[150px] truncate">"{workout.notes}"</p>}
-                </div>
-
-                <div className="flex gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button
-                    onClick={() => openModal(workout)}
-                    className="p-2 text-muted-foreground hover:bg-secondary hover:text-foreground rounded-lg transition-colors"
-                  >
-                    <Edit2 size={16} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(workout.id)}
-                    className="p-2 text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))
-        )}
-      </motion.div>
+      {/* Today's Workouts Section */}
+      {todayWorkouts.length > 0 ? (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-3"
+        >
+          <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-wider text-xs">
+            <CalendarDays size={14} />
+            Today's Overview
+          </div>
+          <div className="grid gap-4">
+            {todayWorkouts.map(workout => (
+              <WorkoutCard key={workout.id} workout={workout} showActions={false} />
+            ))}
+          </div>
+          <div className="border-b border-border my-6"></div>
+        </motion.div>
+      ) : (
+        <motion.div variants={itemVariants} className="text-center py-12 text-muted-foreground bg-card border border-border rounded-xl">
+          No workouts logged for today. Time to get moving!
+        </motion.div>
+      )}
 
       {/* Modal Overlay */}
       <AnimatePresence>
@@ -385,6 +401,7 @@ const Workouts = () => {
                       <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Date</label>
                       <input
                         type="date"
+                        max={new Date().toLocaleDateString('en-CA')}
                         value={formData.date}
                         onChange={e => setFormData({ ...formData, date: e.target.value })}
                         className={`w-full bg-secondary/50 border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:outline-none transition-all ${errors.date ? 'border-destructive' : 'border-border'}`}
