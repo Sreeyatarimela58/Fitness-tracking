@@ -9,21 +9,22 @@ import { getProfile, saveProfile, calculateBMI } from '../services/storage';
 import { motion } from 'framer-motion';
 
 const Gender = {
-  Male: 'Male',
-  Female: 'Female',
-  Other: 'Other'
+    Male: 'Male',
+    Female: 'Female',
+    Other: 'Other'
 };
 
 const ActivityLevel = {
-  Sedentary: 'Sedentary',
-  Light: 'Light',
-  Moderate: 'Moderate',
-  Active: 'Active',
-  VeryActive: 'Very Active'
+    Sedentary: 'Sedentary',
+    Light: 'Light',
+    Moderate: 'Moderate',
+    Active: 'Active',
+    VeryActive: 'Very Active'
 };
 
 const ProfileSetup = () => {
     const navigate = useNavigate();
+    const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         age: 25,
@@ -43,6 +44,7 @@ const ProfileSetup = () => {
             const existing = await getProfile();
             if (existing) {
                 setFormData(existing);
+                setIsEditing(true);
             }
         };
         loadProfile();
@@ -61,6 +63,10 @@ const ProfileSetup = () => {
         const { name, value } = e.target;
         // Enforce positive numbers for numeric fields
         if (['age', 'height', 'weight', 'goalSteps', 'goalCalories'].includes(name)) {
+            if (value === '') {
+                setFormData(prev => ({ ...prev, [name]: '' }));
+                return;
+            }
             const numVal = Number(value);
             if (numVal < 0) return; // Prevent negative input
             setFormData(prev => ({ ...prev, [name]: numVal }));
@@ -112,7 +118,7 @@ const ProfileSetup = () => {
     };
 
     return (
-        <motion.div 
+        <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -171,7 +177,8 @@ const ProfileSetup = () => {
                                             min="1"
                                             value={formData.age}
                                             onChange={handleChange}
-                                            className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none"
+                                            disabled={isEditing}
+                                            className={`w-full pl-10 pr-4 py-3 bg-background border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none ${isEditing ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         />
                                     </div>
                                 </div>
@@ -183,7 +190,8 @@ const ProfileSetup = () => {
                                             name="gender"
                                             value={formData.gender}
                                             onChange={handleChange}
-                                            className="w-full pl-3 pr-8 py-3 bg-background border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none appearance-none"
+                                            disabled={isEditing}
+                                            className={`w-full pl-3 pr-8 py-3 bg-background border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none appearance-none ${isEditing ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         >
                                             {Object.values(Gender).map(g => <option key={g} value={g}>{g}</option>)}
                                         </select>
@@ -322,9 +330,9 @@ const ProfileSetup = () => {
                                             {bmiResult.value}
                                         </span>
                                         <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-bold border ${bmiResult.category === 'Normal weight' ? 'bg-green-100 text-green-700 border-green-200 dark:bg-green-500/20 dark:text-green-400 dark:border-green-500/30' :
-                                                bmiResult.category.includes('Overweight') ? 'bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-500/20 dark:text-yellow-400 dark:border-yellow-500/30' :
-                                                    bmiResult.category === 'Underweight' ? 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30' :
-                                                        'bg-red-100 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-400 dark:border-red-500/30'
+                                            bmiResult.category.includes('Overweight') ? 'bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-500/20 dark:text-yellow-400 dark:border-yellow-500/30' :
+                                                bmiResult.category === 'Underweight' ? 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30' :
+                                                    'bg-red-100 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-400 dark:border-red-500/30'
                                             }`}>
                                             {bmiResult.category === 'Normal weight' ? <CheckCircle2 size={14} /> : <AlertTriangle size={14} />}
                                             {bmiResult.category}

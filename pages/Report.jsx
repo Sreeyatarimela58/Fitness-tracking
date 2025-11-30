@@ -57,7 +57,7 @@ const Report = () => {
   const avgWater = Math.round(totalWater / daysLogged);
 
   // Chart data for PDF
-  const dailyCalories= {};
+  const dailyCalories = {};
   // Initialize last 7 days with 0
   for (let i = 6; i >= 0; i--) {
     const d = new Date();
