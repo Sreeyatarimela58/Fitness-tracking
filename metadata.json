@@ -1,0 +1,5 @@
+{
+  "name": "FitTrack Pro",
+  "description": "A premium, privacy-focused fitness tracking application with local storage, detailed analytics, and report generation.",
+  "requestFramePermissions": []
+}

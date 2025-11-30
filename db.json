@@ -1,0 +1,195 @@
+{
+  "users": [
+    {
+      "id": "0a05",
+      "email": "sreeya_tarimela@srmap.edu.in",
+      "joinedDate": "2025-11-30T04:34:53.334Z",
+      "profile": {
+        "name": "sreeya",
+        "age": 20,
+        "gender": "Female",
+        "height": 150,
+        "weight": 70,
+        "activityLevel": "Moderate",
+        "goalSteps": 10000,
+        "goalCalories": 500,
+        "joinedDate": "2025-11-30T05:06:02.078Z"
+      }
+    },
+    {
+      "id": "0b5f",
+      "email": "sreeyareddy2204@gmail.com",
+      "joinedDate": "2025-11-30T04:40:36.533Z",
+      "profile": null
+    },
+    {
+      "id": "0a8c",
+      "email": "tarimelasree@gmail.com",
+      "joinedDate": "2025-11-30T04:48:17.797Z",
+      "profile": null
+    },
+    {
+      "id": "4cb5",
+      "email": "bhaavay12@gmail.com",
+      "joinedDate": "2025-11-30T05:05:16.087Z",
+      "profile": null
+    }
+  ],
+  "workouts": [
+    {
+      "id": "1764477442064",
+      "date": "2025-11-30",
+      "time": "10:07",
+      "type": "Weightlifting",
+      "duration": 30,
+      "intensity": "Medium",
+      "feeling": "Tired",
+      "rpe": 5,
+      "caloriesBurned": 125,
+      "steps": 0,
+      "distance": 0,
+      "avgHeartRate": 0,
+      "notes": "",
+      "userId": "0a05"
+    },
+    {
+      "id": "1764477474259",
+      "date": "2025-11-30",
+      "time": "10:07",
+      "type": "Swimming",
+      "duration": 30,
+      "intensity": "Medium",
+      "feeling": "Okay",
+      "rpe": 4,
+      "caloriesBurned": 150,
+      "steps": 0,
+      "distance": 0,
+      "avgHeartRate": 0,
+      "notes": "",
+      "userId": "0a05"
+    },
+    {
+      "id": "1764478244443",
+      "date": "2025-11-30",
+      "time": "10:20",
+      "type": "Running",
+      "duration": 30,
+      "intensity": "Medium",
+      "feeling": "Good",
+      "rpe": 5,
+      "caloriesBurned": 343,
+      "steps": 0,
+      "distance": 0,
+      "avgHeartRate": 0,
+      "notes": "",
+      "userId": "0a8c"
+    },
+    {
+      "id": "1764479062734",
+      "date": "2025-11-30",
+      "time": "10:34",
+      "type": "Running",
+      "duration": 30,
+      "intensity": "Medium",
+      "feeling": "Good",
+      "rpe": 5,
+      "caloriesBurned": 343,
+      "steps": 0,
+      "distance": 0,
+      "avgHeartRate": 0,
+      "notes": "",
+      "userId": "0a05"
+    },
+    {
+      "id": "1764479081633",
+      "date": "2025-11-30",
+      "time": "10:34",
+      "type": "HIIT",
+      "duration": 30,
+      "intensity": "Medium",
+      "feeling": "Good",
+      "rpe": 5,
+      "caloriesBurned": 280,
+      "steps": 0,
+      "distance": 0,
+      "avgHeartRate": 0,
+      "notes": "",
+      "userId": "0a05"
+    }
+  ],
+  "dailyStats": [
+    {
+      "date": "2025-11-30",
+      "waterIntake": 11,
+      "sleepHours": 8,
+      "userId": "0a05",
+      "id": "018b"
+    }
+  ],
+  "streak": [
+    {
+      "currentStreak": 1,
+      "longestStreak": 1,
+      "lastLogDate": "2025-11-30",
+      "totalPoints": 10,
+      "userId": "0a05",
+      "id": "ab86"
+    },
+    {
+      "id": "9258",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "0a05"
+    },
+    {
+      "id": "b8f0",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "0b5f"
+    },
+    {
+      "id": "34fa",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "0b5f"
+    },
+    {
+      "currentStreak": 1,
+      "longestStreak": 1,
+      "lastLogDate": "2025-11-30",
+      "totalPoints": 10,
+      "userId": "0a8c",
+      "id": "3e74"
+    },
+    {
+      "id": "563b",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "0a8c"
+    },
+    {
+      "id": "fa6a",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "4cb5"
+    },
+    {
+      "id": "4033",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "4cb5"
+    }
+  ]
+}
