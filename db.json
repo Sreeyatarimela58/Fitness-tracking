@@ -33,6 +33,34 @@
       "email": "bhaavay12@gmail.com",
       "joinedDate": "2025-11-30T05:05:16.087Z",
       "profile": null
+    },
+    {
+      "id": "6d9c",
+      "email": "anudeepmuppalla@gmail.com",
+      "joinedDate": "2025-11-30T06:04:24.131Z",
+      "profile": null
+    },
+    {
+      "id": "5fb5",
+      "email": "anu@gmail.com",
+      "joinedDate": "2025-11-30T06:19:17.977Z",
+      "profile": null
+    },
+    {
+      "id": "bc97",
+      "email": "gary@gmail.com",
+      "joinedDate": "2025-11-30T06:27:08.393Z",
+      "profile": {
+        "name": "Muppalla",
+        "age": 25,
+        "gender": "Male",
+        "height": 170,
+        "weight": 70,
+        "activityLevel": "Moderate",
+        "goalSteps": 10000,
+        "goalCalories": 500,
+        "joinedDate": "2025-11-30T06:40:44.486Z"
+      }
     }
   ],
   "workouts": [
@@ -115,6 +143,22 @@
       "avgHeartRate": 0,
       "notes": "",
       "userId": "0a05"
+    },
+    {
+      "id": "1764482815374",
+      "date": "2025-11-30",
+      "time": "11:36",
+      "type": "Running",
+      "duration": 30,
+      "intensity": "Medium",
+      "feeling": "Okay",
+      "rpe": 5,
+      "caloriesBurned": 402,
+      "steps": 8000,
+      "distance": 3,
+      "avgHeartRate": 75,
+      "notes": "Good",
+      "userId": "6d9c"
     }
   ],
   "dailyStats": [
@@ -190,6 +234,54 @@
       "lastLogDate": null,
       "totalPoints": 0,
       "userId": "4cb5"
+    },
+    {
+      "currentStreak": 1,
+      "longestStreak": 1,
+      "lastLogDate": "2025-11-30",
+      "totalPoints": 10,
+      "userId": "6d9c",
+      "id": "0441"
+    },
+    {
+      "id": "3597",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "6d9c"
+    },
+    {
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "5fb5",
+      "id": "21ec"
+    },
+    {
+      "id": "4b02",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "5fb5"
+    },
+    {
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "bc97",
+      "id": "6f52"
+    },
+    {
+      "id": "3b38",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "bc97"
     }
   ]
 }
