@@ -3,6 +3,7 @@
     {
       "id": "0a05",
       "email": "sreeya_tarimela@srmap.edu.in",
+      "password": "Sreeya@22",
       "joinedDate": "2025-11-30T04:34:53.334Z",
       "profile": {
         "name": "sreeya",
@@ -17,38 +18,9 @@
       }
     },
     {
-      "id": "0b5f",
-      "email": "sreeyareddy2204@gmail.com",
-      "joinedDate": "2025-11-30T04:40:36.533Z",
-      "profile": null
-    },
-    {
-      "id": "0a8c",
-      "email": "tarimelasree@gmail.com",
-      "joinedDate": "2025-11-30T04:48:17.797Z",
-      "profile": null
-    },
-    {
-      "id": "4cb5",
-      "email": "bhaavay12@gmail.com",
-      "joinedDate": "2025-11-30T05:05:16.087Z",
-      "profile": null
-    },
-    {
-      "id": "6d9c",
-      "email": "anudeepmuppalla@gmail.com",
-      "joinedDate": "2025-11-30T06:04:24.131Z",
-      "profile": null
-    },
-    {
-      "id": "5fb5",
-      "email": "anu@gmail.com",
-      "joinedDate": "2025-11-30T06:19:17.977Z",
-      "profile": null
-    },
-    {
       "id": "bc97",
       "email": "gary@gmail.com",
+      "password": "Gary@1957",
       "joinedDate": "2025-11-30T06:27:08.393Z",
       "profile": {
         "name": "Muppalla",
@@ -60,6 +32,23 @@
         "goalSteps": 10000,
         "goalCalories": 500,
         "joinedDate": "2025-11-30T06:40:44.486Z"
+      }
+    },
+    {
+      "id": "801a",
+      "email": "sreeyareddy@gmail.com",
+      "password": "Sreeya@22",
+      "joinedDate": "2025-11-30T07:50:05.414Z",
+      "profile": {
+        "name": "johnson",
+        "age": 20,
+        "gender": "Male",
+        "height": 180,
+        "weight": 75,
+        "activityLevel": "Moderate",
+        "goalSteps": 10000,
+        "goalCalories": 500,
+        "joinedDate": "2025-11-30T07:50:05.582Z"
       }
     }
   ],
@@ -97,22 +86,6 @@
       "userId": "0a05"
     },
     {
-      "id": "1764478244443",
-      "date": "2025-11-30",
-      "time": "10:20",
-      "type": "Running",
-      "duration": 30,
-      "intensity": "Medium",
-      "feeling": "Good",
-      "rpe": 5,
-      "caloriesBurned": 343,
-      "steps": 0,
-      "distance": 0,
-      "avgHeartRate": 0,
-      "notes": "",
-      "userId": "0a8c"
-    },
-    {
       "id": "1764479062734",
       "date": "2025-11-30",
       "time": "10:34",
@@ -145,20 +118,36 @@
       "userId": "0a05"
     },
     {
-      "id": "1764482815374",
+      "id": "1764489632103",
       "date": "2025-11-30",
-      "time": "11:36",
-      "type": "Running",
+      "time": "13:29",
+      "type": "Swimming",
       "duration": 30,
       "intensity": "Medium",
-      "feeling": "Okay",
+      "feeling": "Good",
       "rpe": 5,
-      "caloriesBurned": 402,
-      "steps": 8000,
-      "distance": 3,
-      "avgHeartRate": 75,
-      "notes": "Good",
-      "userId": "6d9c"
+      "caloriesBurned": 210,
+      "steps": 1000,
+      "distance": 0,
+      "avgHeartRate": 72,
+      "notes": "",
+      "userId": "0a05"
+    },
+    {
+      "id": "1764490118614",
+      "date": "2025-11-30",
+      "time": "13:31",
+      "type": "Yoga",
+      "duration": 30,
+      "intensity": "Low",
+      "feeling": "Good",
+      "rpe": 5,
+      "caloriesBurned": 70,
+      "steps": 0,
+      "distance": 0,
+      "avgHeartRate": 68,
+      "notes": "",
+      "userId": "0a05"
     }
   ],
   "dailyStats": [
@@ -177,103 +166,7 @@
       "lastLogDate": "2025-11-30",
       "totalPoints": 10,
       "userId": "0a05",
-      "id": "ab86"
-    },
-    {
-      "id": "9258",
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "0a05"
-    },
-    {
-      "id": "b8f0",
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "0b5f"
-    },
-    {
-      "id": "34fa",
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "0b5f"
-    },
-    {
-      "currentStreak": 1,
-      "longestStreak": 1,
-      "lastLogDate": "2025-11-30",
-      "totalPoints": 10,
-      "userId": "0a8c",
-      "id": "3e74"
-    },
-    {
-      "id": "563b",
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "0a8c"
-    },
-    {
-      "id": "fa6a",
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "4cb5"
-    },
-    {
-      "id": "4033",
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "4cb5"
-    },
-    {
-      "currentStreak": 1,
-      "longestStreak": 1,
-      "lastLogDate": "2025-11-30",
-      "totalPoints": 10,
-      "userId": "6d9c",
-      "id": "0441"
-    },
-    {
-      "id": "3597",
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "6d9c"
-    },
-    {
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "5fb5",
-      "id": "21ec"
-    },
-    {
-      "id": "4b02",
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "5fb5"
-    },
-    {
-      "currentStreak": 0,
-      "longestStreak": 0,
-      "lastLogDate": null,
-      "totalPoints": 0,
-      "userId": "bc97",
-      "id": "6f52"
+      "id": "9258"
     },
     {
       "id": "3b38",
@@ -282,6 +175,14 @@
       "lastLogDate": null,
       "totalPoints": 0,
       "userId": "bc97"
+    },
+    {
+      "id": "8f96",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "lastLogDate": null,
+      "totalPoints": 0,
+      "userId": "801a"
     }
   ]
 }

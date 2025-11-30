@@ -65,9 +65,9 @@ const Workouts = () => {
       if (isModalOpen) {
         const profile = await getProfile();
         const calories = estimateCalories(
-          (formData.type ) || WorkoutType.Running,
+          (formData.type) || WorkoutType.Running,
           Number(formData.duration) || 0,
-          (formData.intensity ) || Intensity.Medium,
+          (formData.intensity) || Intensity.Medium,
           profile?.weight || 70
         );
         setEstimatedCalories(calories);
@@ -243,7 +243,7 @@ const Workouts = () => {
       </div>
 
       {/* List */}
-      <motion.div 
+      <motion.div
         variants={listVariants}
         initial="hidden"
         animate="visible"
@@ -255,8 +255,8 @@ const Workouts = () => {
           </motion.div>
         ) : (
           filteredWorkouts.map((workout) => (
-            <motion.div 
-              key={workout.id} 
+            <motion.div
+              key={workout.id}
               variants={itemVariants}
               layout
               className="bg-card border border-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row gap-4 justify-between items-start md:items-center group"
@@ -270,8 +270,8 @@ const Workouts = () => {
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <h3 className="font-semibold text-lg truncate">{workout.type}</h3>
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide border ${workout.intensity === Intensity.High ? 'border-red-200 text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-300 dark:border-red-800' :
-                        workout.intensity === Intensity.Medium ? 'border-orange-200 text-orange-600 bg-orange-50 dark:bg-orange-900/20 dark:text-orange-300 dark:border-orange-800' :
-                          'border-green-200 text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-300 dark:border-green-800'
+                      workout.intensity === Intensity.Medium ? 'border-orange-200 text-orange-600 bg-orange-50 dark:bg-orange-900/20 dark:text-orange-300 dark:border-orange-800' :
+                        'border-green-200 text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-300 dark:border-green-800'
                       }`}>
                       {workout.intensity}
                     </span>
@@ -339,13 +339,13 @@ const Workouts = () => {
       {/* Modal Overlay */}
       <AnimatePresence>
         {isModalOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
@@ -431,7 +431,7 @@ const Workouts = () => {
                   </div>
 
                   {/* Row 3: Metrics (Heart Rate, Steps, Distance) */}
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className={`grid gap-4 ${(formData.type === WorkoutType.Running || formData.type === WorkoutType.Walking) ? 'grid-cols-3' : 'grid-cols-1'}`}>
                     <div className="space-y-1.5">
                       <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1">
                         <Heart size={10} /> BPM
@@ -446,29 +446,34 @@ const Workouts = () => {
                         className={`w-full bg-secondary/50 border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:outline-none transition-all ${errors.avgHeartRate ? 'border-destructive' : 'border-border'}`}
                       />
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Steps</label>
-                      <input
-                        type="number"
-                        min="0"
-                        placeholder="--"
-                        value={formData.steps || ''}
-                        onChange={e => setFormData({ ...formData, steps: Number(e.target.value) })}
-                        className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Km</label>
-                      <input
-                        type="number"
-                        min="0"
-                        step="0.1"
-                        placeholder="--"
-                        value={formData.distance || ''}
-                        onChange={e => setFormData({ ...formData, distance: Number(e.target.value) })}
-                        className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-                      />
-                    </div>
+
+                    {(formData.type === WorkoutType.Running || formData.type === WorkoutType.Walking) && (
+                      <>
+                        <div className="space-y-1.5">
+                          <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Steps</label>
+                          <input
+                            type="number"
+                            min="0"
+                            placeholder="--"
+                            value={formData.steps || ''}
+                            onChange={e => setFormData({ ...formData, steps: Number(e.target.value) })}
+                            className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
+                          />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Km</label>
+                          <input
+                            type="number"
+                            min="0"
+                            step="0.1"
+                            placeholder="--"
+                            value={formData.distance || ''}
+                            onChange={e => setFormData({ ...formData, distance: Number(e.target.value) })}
+                            className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
+                          />
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   {/* Row 4: Intensity & Feeling */}
@@ -483,10 +488,10 @@ const Workouts = () => {
                               type="button"
                               onClick={() => setFormData({ ...formData, intensity: int })}
                               className={`py-2 px-3 rounded-lg text-sm font-semibold border transition-all text-center ${formData.intensity === int
-                                  ? int === Intensity.High ? 'bg-red-500 text-white border-red-600'
-                                    : int === Intensity.Medium ? 'bg-orange-500 text-white border-orange-600'
-                                      : 'bg-green-500 text-white border-green-600'
-                                  : 'bg-background border-border hover:bg-secondary text-muted-foreground'
+                                ? int === Intensity.High ? 'bg-red-500 text-white border-red-600'
+                                  : int === Intensity.Medium ? 'bg-orange-500 text-white border-orange-600'
+                                    : 'bg-green-500 text-white border-green-600'
+                                : 'bg-background border-border hover:bg-secondary text-muted-foreground'
                                 }`}
                             >
                               {int}
@@ -527,8 +532,8 @@ const Workouts = () => {
                             type="button"
                             onClick={() => setFormData({ ...formData, feeling: f })}
                             className={`flex-1 flex flex-col items-center gap-1 min-w-[60px] p-2 rounded-xl border transition-all ${formData.feeling === f
-                                ? 'bg-primary/10 border-primary text-primary shadow-[0_0_0_1px_rgba(var(--primary))]'
-                                : 'bg-background border-border hover:bg-secondary text-muted-foreground'
+                              ? 'bg-primary/10 border-primary text-primary shadow-[0_0_0_1px_rgba(var(--primary))]'
+                              : 'bg-background border-border hover:bg-secondary text-muted-foreground'
                               }`}
                           >
                             {getFeelingIcon(f)}
